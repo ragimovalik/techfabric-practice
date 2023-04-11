@@ -10,5 +10,83 @@
     <script src="./js/index.js" defer></script>
     <title>Clicker</title>
   </head>
-  <body></body>
+  <body>
+    <div class="wrapper" id="root">
+      <header>
+        <section class="status__bar">
+          <div>Welcome: userName</div>
+          <ul class="flex" role="list">
+            <li>
+              <p>Score <span id="score">0</span></p>
+            </li>
+            <li>
+              <p>Level <span id="level">1</span></p>
+            </li>
+            <li>
+              <p>Timer <span id="timer">0:00</span></p>
+            </li>
+          </ul>
+        </section>
+      </header>
+      <main>
+        <section class="game__wrapper">
+          <div id="gamefield" class="game__field flex">
+            <div id="hole" class="game__hole">
+              <div id="target" class="game__target"></div>
+            </div>
+          </div>
+
+          <button
+            id="start-btn"
+            class="game__button"
+            type="button"
+            onclick="start()"
+          >
+            Start Game
+          </button>
+        </section>
+      </main>
+
+      <section id="form-box" class="form__wrapper">
+        <form
+          name="user-data"
+          class="form flex"
+          onsubmit="submitHandler(event)"
+        >
+          <div class="form__inputs flex">
+            <label for="name"
+              >Name:
+              <input
+                name="name"
+                id="name"
+                type="text"
+                maxlength="20"
+                placeholder="your name"
+                required
+                title="Name should be longer than 2 and less than 20 characters"
+              />
+              <br />
+              <small id="isValid-name"
+                >* Name should be longer than 2 and less than 20
+                characters</small
+              >
+            </label>
+
+            <label for="email"
+              >Email:
+              <input
+                name="email"
+                id="email"
+                type="email"
+                placeholder="your email"
+                required
+              />
+            </label>
+          </div>
+
+          <button class="form__button" type="submit">Start Game</button>
+        </form>
+      </section>
+    </div>
+  </body>
 </html>
