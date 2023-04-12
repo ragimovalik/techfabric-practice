@@ -14,16 +14,19 @@
     <div class="wrapper" id="root">
       <header>
         <section class="status__bar">
-          <div>Welcome: userName</div>
+          <div class="flex">
+            <p>Welcome: userName</p>
+            <img src="./images/stickman-bow.svg" width="36" />
+          </div>
           <ul class="flex" role="list">
-            <li>
-              <p>Score <span id="score">0</span></p>
-            </li>
             <li>
               <p>Level <span id="level">1</span></p>
             </li>
             <li>
-              <p>Timer <span id="timer">0:00</span></p>
+              <p>Total Score <span id="score">0</span></p>
+            </li>
+            <li>
+              <p>To Next Level <span id="countdown">10</span></p>
             </li>
           </ul>
         </section>
@@ -40,9 +43,9 @@
             id="start-btn"
             class="game__button"
             type="button"
-            onclick="start()"
+            onclick="play()"
           >
-            Start Game
+            Play
           </button>
         </section>
       </main>
@@ -87,6 +90,9 @@
           <button class="form__button" type="submit">Start Game</button>
         </form>
       </section>
+      <div id="modal"></div>
     </div>
+
+    <audio id="sound-hit" src="./sounds/jump-coin-216.mp3"></audio>
   </body>
 </html>

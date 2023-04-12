@@ -3,8 +3,6 @@
   max-width: 700px;
   margin-inline: auto;
   padding: 0.5rem;
-
-  border: 1px solid red;
 }
 
 .flex {
@@ -22,8 +20,6 @@
 
 .form__wrapper {
   padding-block: 2rem;
-
-  border: 1px solid green;
 }
 
 .form {
@@ -64,8 +60,11 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   background-color: beige;
+  border: 5px solid lightgray;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
 }
 
 /* .status__list {} */
@@ -81,13 +80,15 @@
 }
 
 .game__field {
-  align-items: stretch;
   flex: 1 1 400px;
+  align-items: stretch;
   flex-wrap: wrap;
+
   width: 100%;
   margin-inline: auto;
-
-  background-color: azure;
+  border: 5px solid lightgray;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .game__hole {
@@ -98,20 +99,44 @@
 
 .game__hole::after {
   display: block;
+  background: url('../images/wave.svg') bottom center no-repeat;
+  background-size: 25%;
   content: '';
   width: 100%;
+  height: 70px;
+  position: absolute;
+  z-index: 9;
+  bottom: -30px;
 }
 
 .game__target {
+  background-image: url('../images/jumper.svg');
+  /* background-image: url('../images/jumper-fun.svg'); */
+  /* background-image: url('../images/basketball.svg'); */
+  /* background-image: url('../images/stickman-dancing.svg'); */
+  /* background-image: url('../images/fish.svg'); */
+
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 40%;
+  position: absolute;
+  top: 100%;
   width: 100%;
   height: 100%;
-
-  cursor: pointer;
+  transition: all 400ms;
 }
 
+.game__hole.up .game__target {
+  cursor: zoom-in;
+  top: 5%;
+}
 .game__button {
   width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  height: 50px;
+  border-radius: 8px;
   border: 4px solid lightgray;
+  font-weight: bold;
+  color: #333333;
+  letter-spacing: 2px;
+  cursor: pointer;
 }
