@@ -15,10 +15,12 @@
       <header>
         <section class="status__bar">
           <div class="flex">
-            <p>Welcome: userName</p>
-            <img src="./images/stickman-bow.svg" width="36" />
+            <p>userName</p>
+            <button type="button" onclick="modalOpen(event)">
+              <img src="./images/stickman-bow.svg" width="36" />
+            </button>
           </div>
-          <ul class="flex" role="list">
+          <ul class="status__list flex" role="list">
             <li>
               <p>Level <span id="level">1</span></p>
             </li>
@@ -26,7 +28,7 @@
               <p>Total Score <span id="score">0</span></p>
             </li>
             <li>
-              <p>To Next Level <span id="countdown">10</span></p>
+              <p>To Next <span id="countdown">10</span></p>
             </li>
           </ul>
         </section>
@@ -90,7 +92,16 @@
           <button class="form__button" type="submit">Start Game</button>
         </form>
       </section>
-      <div id="modal"></div>
+    </div>
+
+    <div id="modal" class="modal flex">
+      <div class="modal__overlay"></div>
+
+      <div class="modal__content flex">
+        <p>askjdakd j kajshd aiewqo zsd alksjdlakjd</p>
+      </div>
+
+      <button type="button" class="modal__button" id="modal-close"></button>
     </div>
 
     <audio id="sound-hit" src="./sounds/jump-coin-216.mp3"></audio>

@@ -20,6 +20,7 @@
 
 .form__wrapper {
   padding-block: 2rem;
+  font-size: 1.2rem;
 }
 
 .form {
@@ -67,7 +68,12 @@
   border-top-left-radius: 0.5rem;
 }
 
-/* .status__list {} */
+.status__list li {
+  padding: 0.5rem;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
 
 /* Game Area */
 .game__wrapper {
@@ -139,4 +145,80 @@
   color: #333333;
   letter-spacing: 2px;
   cursor: pointer;
+}
+
+/* Modal Window */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease-in-out 250ms;
+
+  z-index: 19;
+}
+
+.modal.is-open {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal__content {
+  flex: 0 1 70%;
+  height: 80%;
+
+  border: 3px solid lightgray;
+  background-color: #ff9c08;
+  border-radius: 0.75rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+
+  transform: scale(0.95);
+  transition: transform ease-in-out 250ms;
+}
+
+.modal.is-open .modal__content {
+  transform: scale(1);
+}
+
+.modal__button {
+  position: absolute;
+  top: 2%;
+  right: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color ease-in-out 250ms;
+  outline: none;
+  background-image: url('../images/icon-close.svg');
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+.modal__button:hover,
+.modal__button:focus {
+  background-color: rgba(0, 0, 0, 0.5);
 }

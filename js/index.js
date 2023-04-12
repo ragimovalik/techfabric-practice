@@ -7,6 +7,10 @@ const holeEl = document.getElementById('hole');
 const targetEl = document.getElementById('target');
 const startBtnEl = document.getElementById('start-btn');
 
+const modal = document.getElementById('modal');
+const modalClosingBtn = document.getElementById('modal-close');
+const modalOverlay = document.querySelector('.modal__overlay');
+
 const scoreEl = document.getElementById('score');
 const levelEl = document.getElementById('level');
 const countdownEl = document.getElementById('countdown');
@@ -16,10 +20,10 @@ const audio = document.getElementById('sound-hit');
 // Variables to Status Bar
 let score = 0;
 let level = 1;
-let hitCountToNextLevel = 10;
+let hitCountToNextLevel = 5;
 
 // Constants
-const WIN_SCORE = 11; // counts
+const WIN_SCORE = 25; // counts
 const JUMP_DELAY = 500; // milliseconds
 const JUMP_DURATION = 850; // milliseconds
 const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
@@ -39,9 +43,13 @@ function delay(func, ms) {
 }
 
 const shouldStopPlaying = () => {
-  if (hitCountToNextLevel === 0 || score >= WIN_SCORE) return true;
+  if (score >= WIN_SCORE) return true;
 
   return false;
+};
+
+const jumpToNextLevel = () => {
+  return hitCountToNextLevel === 0 ? true : false;
 };
 
 // ========== Form ===========
@@ -87,6 +95,11 @@ function hit(event) {
   // event.target.classList.remove('up');
   audio.currentTime = 0;
   audio.play();
+
+  updateStatus();
+}
+
+function updateStatus() {
   score++;
   level = Math.ceil(score / 10);
   hitCountToNextLevel--;
@@ -94,11 +107,34 @@ function hit(event) {
   scoreEl.textContent = score;
   levelEl.textContent = level;
   countdownEl.textContent = hitCountToNextLevel;
+
+  // targetEl.style = targetImages[level];
 }
 
 targetEl.addEventListener('click', hit);
 
+// ========== Modal ===========
+modalClosingBtn.addEventListener('click', modalClose);
+modalOverlay.addEventListener('click', modalClose);
+
+function modalOpen(event) {
+  event.preventDefault();
+
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+
+  modal.classList.add('is-open');
+}
+
+function modalClose() {
+  modal.classList.remove('is-open');
+}
+
 /*
+// modalOpen.addEventListener('click', modalOpen);
+
+
 const shouldLevelUp = () => {
   level++;
 };
