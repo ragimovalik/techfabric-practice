@@ -8,14 +8,15 @@ const targetEl = document.getElementById('target');
 const startBtnEl = document.getElementById('start-btn');
 
 const modal = document.getElementById('modal');
-const modalClosingBtn = document.getElementById('modal-close');
 const modalOverlay = document.querySelector('.modal__overlay');
 
 const scoreEl = document.getElementById('score');
 const levelEl = document.getElementById('level');
-const countdownEl = document.getElementById('countdown');
+const levelLengthEl = document.getElementById('level-length');
 
-const audio = document.getElementById('sound-hit');
+const soundHit = document.getElementById('sound-hit');
+const soundNextlevel = document.getElementById('sound-nextlevel');
+const soundWin = document.getElementById('sound-win');
 
 // Variables to Status Bar
 let score = 0;
@@ -23,6 +24,7 @@ let level = 1;
 let hitCountToNextLevel = 5;
 
 // Constants
+const LEVELUP_COUNT = 5;
 const WIN_SCORE = 25; // counts
 const JUMP_DELAY = 500; // milliseconds
 const JUMP_DURATION = 850; // milliseconds
@@ -42,14 +44,28 @@ function delay(func, ms) {
   setTimeout(() => func(), ms);
 }
 
-const shouldStopPlaying = () => {
+const isWin = () => {
   if (score >= WIN_SCORE) return true;
 
   return false;
 };
 
-const jumpToNextLevel = () => {
-  return hitCountToNextLevel === 0 ? true : false;
+const isNextLevel = () => {
+  if (hitCountToNextLevel === 0) {
+    modalOpen();
+
+    soundNextlevel.currentTime = 0;
+    soundNextlevel.play();
+
+    setTimeout(() => {
+      modalClose();
+    }, 4000);
+
+    hitCountToNextLevel = LEVELUP_COUNT;
+    levelLengthEl.textContent = LEVELUP_COUNT;
+    return true;
+  }
+  return false;
 };
 
 // ========== Form ===========
@@ -63,7 +79,8 @@ function submitHandler(event) {
 // ========== Game ===========
 
 function jump() {
-  if (shouldStopPlaying()) return;
+  if (isWin()) return;
+  isNextLevel();
 
   // Jumps faster on next level
   const time = JUMP_DURATION - level * LEVELUP_SPEEDUP_STEP;
@@ -79,10 +96,9 @@ function jump() {
 function play() {
   score = 0;
   level = 1;
-  hitCountToNextLevel = 10;
   scoreEl.textContent = score;
   levelEl.textContent = level;
-  countdownEl.textContent = hitCountToNextLevel;
+  levelLengthEl.textContent = LEVELUP_COUNT;
 
   jump();
   startBtnEl.disabled = true;
@@ -90,23 +106,23 @@ function play() {
 
 function hit(event) {
   if (!event.isTrusted) throw new Error('No Cheat!');
-  if (shouldStopPlaying()) return;
+  if (isWin()) return;
+  if (isNextLevel()) return;
 
-  // event.target.classList.remove('up');
-  audio.currentTime = 0;
-  audio.play();
+  soundHit.currentTime = 0;
+  soundHit.play();
 
   updateStatus();
 }
 
 function updateStatus() {
   score++;
-  level = Math.ceil(score / 10);
+  level = Math.ceil(score / LEVELUP_COUNT);
   hitCountToNextLevel--;
 
   scoreEl.textContent = score;
   levelEl.textContent = level;
-  countdownEl.textContent = hitCountToNextLevel;
+  levelLengthEl.textContent = hitCountToNextLevel;
 
   // targetEl.style = targetImages[level];
 }
@@ -114,16 +130,9 @@ function updateStatus() {
 targetEl.addEventListener('click', hit);
 
 // ========== Modal ===========
-modalClosingBtn.addEventListener('click', modalClose);
 modalOverlay.addEventListener('click', modalClose);
 
-function modalOpen(event) {
-  event.preventDefault();
-
-  if (event.target.nodeName !== 'IMG') {
-    return;
-  }
-
+function modalOpen() {
   modal.classList.add('is-open');
 }
 
@@ -132,10 +141,6 @@ function modalClose() {
 }
 
 /*
-// modalOpen.addEventListener('click', modalOpen);
 
 
-const shouldLevelUp = () => {
-  level++;
-};
 */

@@ -177,6 +177,7 @@
 }
 
 .modal__content {
+  flex-direction: column;
   flex: 0 1 70%;
   height: 80%;
 
@@ -194,31 +195,4 @@
   transform: scale(1);
 }
 
-.modal__button {
-  position: absolute;
-  top: 2%;
-  right: 4%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  border-radius: 50%;
-  background-color: transparent;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color ease-in-out 250ms;
-  outline: none;
-  background-image: url('../images/icon-close.svg');
-  background-position: center;
-  background-size: 60%;
-  background-repeat: no-repeat;
-}
-
-.modal__button:hover,
-.modal__button:focus {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+/* .modal__countdown {} */
