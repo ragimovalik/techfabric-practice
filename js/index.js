@@ -1,29 +1,35 @@
+import { refs } from './_refs.js';
+import { constants } from './_constants.js';
 import {
   formMarkup,
   nextLevelCogratsMarkup,
   winCongratsMarkup,
 } from '../templates/gameMarkup.js';
+import { delay } from './_utils.js';
 
-// =========== Refs ===========
-const holeEl = document.getElementById('hole');
-const targetEl = document.getElementById('target');
-const startBtnEl = document.getElementById('start-btn');
+const {
+  holeEl,
+  targetEl,
+  startBtnEl,
+  modal,
+  modalOverlay,
+  modalContent,
+  userNameEl,
+  scoreEl,
+  levelEl,
+  levelLengthEl,
+  soundHit,
+  soundNextlevel,
+  soundWin,
+} = refs;
 
-// modal refs
-const modal = document.getElementById('modal');
-const modalOverlay = document.querySelector('.modal__overlay');
-const modalContent = document.querySelector('.modal__content');
-
-// statusbar refs
-const userNameEl = document.getElementById('user-name');
-const scoreEl = document.getElementById('score');
-const levelEl = document.getElementById('level');
-const levelLengthEl = document.getElementById('level-length');
-
-// Audio refs
-const soundHit = document.getElementById('sound-hit');
-const soundNextlevel = document.getElementById('sound-nextlevel');
-const soundWin = document.getElementById('sound-win');
+const {
+  LEVELUP_COUNT,
+  WIN_SCORE,
+  JUMP_DELAY,
+  JUMP_DURATION,
+  LEVELUP_SPEEDUP_STEP,
+} = constants;
 
 // =========== Listeners ===========
 addEventListener('DOMContentLoaded', () => {
@@ -42,13 +48,6 @@ let score = 0;
 let level = 1;
 let hitCountToNextLevel = 5;
 
-// Constants
-const LEVELUP_COUNT = 5;
-const WIN_SCORE = 25; // counts
-const JUMP_DELAY = 500; // milliseconds
-const JUMP_DURATION = 850; // milliseconds
-const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
-
 const targetImages = {
   1: "url('images/stickman-dancing.svg')",
   2: "url('images/fish.svg')",
@@ -57,12 +56,7 @@ const targetImages = {
   5: "url('images/jumper-fun.svg')",
 };
 
-// Utils
-function delay(func, ms) {
-  if (!ms) ms = 500;
-  setTimeout(() => func(), ms);
-}
-
+// Check
 const isWin = () => {
   if (score >= WIN_SCORE) {
     const markup = winCongratsMarkup();
@@ -115,6 +109,7 @@ function handleSubmit(event) {
   const form = event.target;
   const isNameValid = document.getElementById('isValid-name');
 
+  // Username input field validation.
   if (form.name.value.length < 2 || form.name.value.length > 20) {
     isNameValid.style.color = 'red';
     return false;
@@ -132,14 +127,19 @@ function handleSubmit(event) {
 // ========== Game ===========
 
 function jump() {
+  // Checks is total score reached WIN_SCORE
   if (isWin()) return;
+
+  // Checks is score reached for levelup
   isNextLevel();
 
   // Jumps faster on next level
   const time = JUMP_DURATION - level * LEVELUP_SPEEDUP_STEP;
 
+  // Target jumps
   holeEl.classList.add('up');
 
+  // Hide target
   setTimeout(() => {
     holeEl.classList.remove('up');
     delay(jump, JUMP_DELAY);

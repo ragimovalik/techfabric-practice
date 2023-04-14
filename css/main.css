@@ -1,3 +1,10 @@
+/* Variables */
+:root {
+  --bg-modal: #ff9c08;
+  --border-main: lightgray;
+  --txt-white: #ffffff;
+}
+
 /* Layout */
 .wrapper {
   max-width: 700px;
@@ -18,11 +25,13 @@
 
 /* Form */
 .form__wrapper {
+  flex: 0 1 80%;
   font-size: 1.2rem;
 }
 
 .form {
-  max-width: 70%;
+  height: 100%;
+  max-width: 90%;
   margin-inline: auto;
   flex-direction: column;
   align-items: stretch;
@@ -39,15 +48,17 @@
 
 .form__inputs input {
   width: 100%;
-  height: 45px;
+  height: 50px;
   padding-inline-start: 0.5rem;
   border-radius: 0.5rem;
 }
 
 .form__button {
   width: 90%;
-  height: 40px;
+  height: 50px;
   margin-inline: auto;
+  margin-block-start: 2rem;
+  border-radius: 0.5rem;
 }
 
 .form__inputs small {
@@ -64,14 +75,14 @@
 
   padding: 1rem;
   background-color: beige;
-  border: 5px solid lightgray;
+  border: 5px solid var(--border-main);
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
 }
 
 .status__list li {
   padding: 0.5rem;
-  border: 1px solid lightgray;
+  border: 1px solid var(--border-main);
   border-radius: 6px;
   background-color: #ffffff;
 }
@@ -90,7 +101,7 @@
 
   width: 100%;
   margin-inline: auto;
-  border: 5px solid lightgray;
+  border: 5px solid var(--border-main);
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }
@@ -138,7 +149,7 @@
   width: 150px;
   height: 50px;
   border-radius: 8px;
-  border: 4px solid lightgray;
+  border: 4px solid var(--border-main);
   font-weight: bold;
   color: #333333;
   letter-spacing: 2px;
@@ -183,10 +194,10 @@
   flex: 0 1 70%;
   height: 90%;
 
-  border: 3px solid lightgray;
+  border: 3px solid var(--border-main);
   border-radius: 0.75rem;
   background-color: #ff9c08;
-  color: #ffffff;
+  color: var(--txt-white);
   font-size: 1.5rem;
 
   transform: scale(0.95);
@@ -211,7 +222,7 @@
   border: none;
   border-radius: 50%;
   background-color: transparent;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   transition: background-color ease-in-out 250ms;
   outline: none;

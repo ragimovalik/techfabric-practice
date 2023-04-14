@@ -43,8 +43,7 @@ export const nextLevelCogratsMarkup = (level = 2) => {
     <h3>Congratulations!</h3>
     <p>New Level Is Open</p>
     <p>Level - ${level}</p>
-    <p id="countdown" class="modal__countdown">TIMER</p>
-    <button type="button" class="modal__button"></button>`;
+    <p id="countdown" class="modal__countdown">TIMER</p>`;
 };
 
 export const winCongratsMarkup = () => {
