@@ -1,7 +1,7 @@
 /* Layout */
 .wrapper {
   max-width: 700px;
-  margin-inline: auto;
+  margin: 2rem auto;
   padding: 0.5rem;
 }
 
@@ -17,9 +17,7 @@
 }
 
 /* Form */
-
 .form__wrapper {
-  padding-block: 2rem;
   font-size: 1.2rem;
 }
 
@@ -32,7 +30,7 @@
 
 .form__inputs {
   flex-direction: column;
-  padding-block: 2rem;
+  padding-block: 0.5rem;
 }
 
 .form__inputs > * {
@@ -41,12 +39,15 @@
 
 .form__inputs input {
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding-inline-start: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .form__button {
+  width: 90%;
   height: 40px;
+  margin-inline: auto;
 }
 
 .form__inputs small {
@@ -77,11 +78,8 @@
 
 /* Game Area */
 .game__wrapper {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
   margin-block-end: 2rem;
 }
 
@@ -133,7 +131,7 @@
 }
 
 .game__hole.up .game__target {
-  cursor: zoom-in;
+  cursor: crosshair;
   top: 5%;
 }
 .game__button {
@@ -145,6 +143,10 @@
   color: #333333;
   letter-spacing: 2px;
   cursor: pointer;
+}
+
+.game__button:disabled {
+  cursor: not-allowed;
 }
 
 /* Modal Window */
@@ -179,11 +181,11 @@
 .modal__content {
   flex-direction: column;
   flex: 0 1 70%;
-  height: 80%;
+  height: 90%;
 
   border: 3px solid lightgray;
-  background-color: #ff9c08;
   border-radius: 0.75rem;
+  background-color: #ff9c08;
   color: #ffffff;
   font-size: 1.5rem;
 
@@ -193,6 +195,35 @@
 
 .modal.is-open .modal__content {
   transform: scale(1);
+}
+
+.modal__button {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color ease-in-out 250ms;
+  outline: none;
+  background-image: url('../images/icon-close.svg');
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+.modal__button:hover,
+.modal__button:focus {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* .modal__countdown {} */

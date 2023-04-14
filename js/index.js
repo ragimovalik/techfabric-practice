@@ -1,24 +1,43 @@
-// Refs
-const rootEl = document.getElementById('root');
-const formBoxEl = document.getElementById('form-box');
-const userForm = document.forms['user-data'];
-const isValidNameEl = document.getElementById('isValid-name');
+import {
+  formMarkup,
+  nextLevelCogratsMarkup,
+  winCongratsMarkup,
+} from '../templates/gameMarkup.js';
+
+// =========== Refs ===========
 const holeEl = document.getElementById('hole');
 const targetEl = document.getElementById('target');
 const startBtnEl = document.getElementById('start-btn');
 
+// modal refs
 const modal = document.getElementById('modal');
 const modalOverlay = document.querySelector('.modal__overlay');
+const modalContent = document.querySelector('.modal__content');
 
+// statusbar refs
+const userNameEl = document.getElementById('user-name');
 const scoreEl = document.getElementById('score');
 const levelEl = document.getElementById('level');
 const levelLengthEl = document.getElementById('level-length');
 
+// Audio refs
 const soundHit = document.getElementById('sound-hit');
 const soundNextlevel = document.getElementById('sound-nextlevel');
 const soundWin = document.getElementById('sound-win');
 
+// =========== Listeners ===========
+addEventListener('DOMContentLoaded', () => {
+  const markup = formMarkup();
+  modalContent.innerHTML = markup;
+  modalOpen();
+});
+
+modal.addEventListener('submit', handleSubmit);
+startBtnEl.addEventListener('click', play);
+targetEl.addEventListener('click', hit);
+
 // Variables to Status Bar
+const user = { name: '', email: '' };
 let score = 0;
 let level = 1;
 let hitCountToNextLevel = 5;
@@ -31,11 +50,11 @@ const JUMP_DURATION = 850; // milliseconds
 const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
 
 const targetImages = {
-  1: "background-image: url('../images/jumper.svg')",
-  2: "background-image: url('../images/jumper-fun.svg')",
+  1: "background-image: url('../images/stickman-dancing.svg')",
+  2: "background-image: url('../images/fish.svg')",
   3: "background-image: url('../images/basketball.svg')",
-  4: "background-image: url('../images/stickman-dancing.svg')",
-  5: "background-image: url('../images/fish.svg')",
+  4: "background-image: url('../images/jumper.svg')",
+  5: "background-image: url('../images/jumper-fun.svg')",
 };
 
 // Utils
@@ -45,13 +64,30 @@ function delay(func, ms) {
 }
 
 const isWin = () => {
-  if (score >= WIN_SCORE) return true;
+  if (score >= WIN_SCORE) {
+    const markup = winCongratsMarkup();
+    modalContent.innerHTML = markup;
+    modalOpen();
+
+    soundWin.currentTime = 0;
+    soundWin.play();
+
+    const modalCloseBtn = document.querySelector('.modal__button');
+    modalCloseBtn.addEventListener('click', modalClose);
+    modalOverlay.addEventListener('click', modalClose);
+
+    startBtnEl.disabled = false;
+
+    return true;
+  }
 
   return false;
 };
 
 const isNextLevel = () => {
   if (hitCountToNextLevel === 0) {
+    const markup = nextLevelCogratsMarkup(level + 1);
+    modalContent.innerHTML = markup;
     modalOpen();
 
     soundNextlevel.currentTime = 0;
@@ -63,6 +99,9 @@ const isNextLevel = () => {
 
     hitCountToNextLevel = LEVELUP_COUNT;
     levelLengthEl.textContent = LEVELUP_COUNT;
+
+    targetEl.style = targetImages[level];
+
     return true;
   }
   return false;
@@ -70,10 +109,24 @@ const isNextLevel = () => {
 
 // ========== Form ===========
 
-function submitHandler(event) {
+function handleSubmit(event) {
   event.preventDefault();
 
-  console.log('submit');
+  const form = event.target;
+  const isNameValid = document.getElementById('isValid-name');
+
+  if (form.name.value.length < 2 || form.name.value.length > 20) {
+    isNameValid.style.color = 'red';
+    return false;
+  }
+
+  user.name = form.name.value;
+  userNameEl.textContent = user.name || 'Guest';
+  levelLengthEl.textContent = LEVELUP_COUNT;
+
+  modalClose();
+
+  form.reset();
 }
 
 // ========== Game ===========
@@ -96,6 +149,8 @@ function jump() {
 function play() {
   score = 0;
   level = 1;
+  hitCountToNextLevel = LEVELUP_COUNT;
+
   scoreEl.textContent = score;
   levelEl.textContent = level;
   levelLengthEl.textContent = LEVELUP_COUNT;
@@ -123,14 +178,9 @@ function updateStatus() {
   scoreEl.textContent = score;
   levelEl.textContent = level;
   levelLengthEl.textContent = hitCountToNextLevel;
-
-  // targetEl.style = targetImages[level];
 }
 
-targetEl.addEventListener('click', hit);
-
 // ========== Modal ===========
-modalOverlay.addEventListener('click', modalClose);
 
 function modalOpen() {
   modal.classList.add('is-open');
@@ -139,8 +189,3 @@ function modalOpen() {
 function modalClose() {
   modal.classList.remove('is-open');
 }
-
-/*
-
-
-*/

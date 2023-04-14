@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/main.css" />
-    <script src="./js/index.js" defer></script>
+
+    <script src="js/index.js" defer type="module"></script>
+
     <title>Clicker</title>
   </head>
+
   <body>
     <div class="wrapper" id="root">
       <header>
         <section class="status__bar">
           <div class="flex">
-            <p>userName</p>
+            <p id="user-name"></p>
             <img src="./images/stickman-bow.svg" width="36" />
           </div>
           <ul class="status__list flex" role="list">
@@ -26,81 +30,29 @@
               <p>Total Score <span id="score">0</span></p>
             </li>
             <li>
-              <p>To Next <span id="level-length">{10}</span></p>
+              <p>To Next <span id="level-length">-</span></p>
             </li>
           </ul>
         </section>
       </header>
       <main>
-        <section class="game__wrapper">
+        <section class="game__wrapper flex">
           <div id="gamefield" class="game__field flex">
             <div id="hole" class="game__hole">
               <div id="target" class="game__target"></div>
             </div>
           </div>
 
-          <button
-            id="start-btn"
-            class="game__button"
-            type="button"
-            onclick="play()"
-          >
+          <button id="start-btn" class="game__button" type="button">
             Play
           </button>
         </section>
       </main>
-
-      <section id="form-box" class="form__wrapper">
-        <form
-          name="user-data"
-          class="form flex"
-          onsubmit="submitHandler(event)"
-        >
-          <div class="form__inputs flex">
-            <label for="name"
-              >Name:
-              <input
-                name="name"
-                id="name"
-                type="text"
-                maxlength="20"
-                placeholder="your name"
-                required
-                title="Name should be longer than 2 and less than 20 characters"
-              />
-              <br />
-              <small id="isValid-name"
-                >* Name should be longer than 2 and less than 20
-                characters</small
-              >
-            </label>
-
-            <label for="email"
-              >Email:
-              <input
-                name="email"
-                id="email"
-                type="email"
-                placeholder="your email"
-                required
-              />
-            </label>
-          </div>
-
-          <button class="form__button" type="submit">Start Game</button>
-        </form>
-      </section>
     </div>
 
     <div id="modal" class="modal flex">
       <div class="modal__overlay"></div>
-
-      <div class="modal__content flex">
-        <h3>Congratulations!</h3>
-        <p>New Level Is Open</p>
-        <p>Level - {level}</p>
-        <p id="countdown" class="modal__countdown">TIMER</p>
-      </div>
+      <div class="modal__content flex"></div>
     </div>
 
     <audio id="sound-hit" src="./sounds/jump-coin-216.mp3"></audio>
