@@ -2,8 +2,8 @@
 
 ### Clicker Game
 
-This Online Clicker Game build by using HTML CSS JS. No frameworks projects.
-This project is a part of Techfabric Frontend School Exam.
+This Online Clicker Game build by using HTML CSS JS. No frameworks project. The
+project is a part of Techfabric Frontend School Exam.
 
 You could play it just follow on this
 [link](https://ragimovalik.github.io/techfabric-practice/)

@@ -1,6 +1,6 @@
 import {
   formMarkup,
-  nextLevelCogratsMarkup,
+  nextLevelCongratsMarkup,
   winCongratsMarkup,
 } from '../templates/gameMarkup.js';
 
@@ -86,7 +86,7 @@ const isWin = () => {
 
 const isNextLevel = () => {
   if (hitCountToNextLevel === 0) {
-    const markup = nextLevelCogratsMarkup(level + 1);
+    const markup = nextLevelCongratsMarkup(level + 1);
     modalContent.innerHTML = markup;
     modalOpen();
 

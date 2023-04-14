@@ -38,7 +38,7 @@ export function formMarkup() {
   `;
 }
 
-export const nextLevelCogratsMarkup = (level = 2) => {
+export const nextLevelCongratsMarkup = (level = 2) => {
   return `
     <h3>Congratulations!</h3>
     <p>New Level Is Open</p>
