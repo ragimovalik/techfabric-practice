@@ -50,11 +50,11 @@ const JUMP_DURATION = 850; // milliseconds
 const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
 
 const targetImages = {
-  1: "url('../images/stickman-dancing.svg')",
-  2: "url('../images/fish.svg')",
-  3: "url('../images/basketball.svg')",
-  4: "url('../images/jumper.svg')",
-  5: "url('../images/jumper-fun.svg')",
+  1: "url('images/stickman-dancing.svg')",
+  2: "url('images/fish.svg')",
+  3: "url('images/basketball.svg')",
+  4: "url('images/jumper.svg')",
+  5: "url('images/jumper-fun.svg')",
 };
 
 // Utils
