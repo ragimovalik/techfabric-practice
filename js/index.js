@@ -1,11 +1,11 @@
-import { refs } from './_refs.js';
-import { constants } from './_constants.js';
+import { refs } from '/js/_refs.js';
+import { constants } from '/js/_constants.js';
 import {
   formMarkup,
   nextLevelCogratsMarkup,
   winCongratsMarkup,
 } from '../templates/gameMarkup.js';
-import { delay } from './_utils.js';
+import { delay } from '/js/_utils.js';
 
 const {
   holeEl,
