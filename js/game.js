@@ -1,35 +1,35 @@
-import { refs } from './_refs.js';
-import { constants } from './_constants.js';
 import {
   formMarkup,
   nextLevelCogratsMarkup,
   winCongratsMarkup,
 } from '../templates/gameMarkup.js';
-import { delay } from './_utils.js';
 
-const {
-  holeEl,
-  targetEl,
-  startBtnEl,
-  modal,
-  modalOverlay,
-  modalContent,
-  userNameEl,
-  scoreEl,
-  levelEl,
-  levelLengthEl,
-  soundHit,
-  soundNextlevel,
-  soundWin,
-} = refs;
+const holeEl = document.getElementById('hole');
+const targetEl = document.getElementById('target');
+const startBtnEl = document.getElementById('start-btn');
 
-const {
-  LEVELUP_COUNT,
-  WIN_SCORE,
-  JUMP_DELAY,
-  JUMP_DURATION,
-  LEVELUP_SPEEDUP_STEP,
-} = constants;
+// modal refs
+const modal = document.getElementById('modal');
+const modalOverlay = document.querySelector('.modal__overlay');
+const modalContent = document.querySelector('.modal__content');
+
+// statusbar refs
+const userNameEl = document.getElementById('user-name');
+const scoreEl = document.getElementById('score');
+const levelEl = document.getElementById('level');
+const levelLengthEl = document.getElementById('level-length');
+
+// Audio refs
+const soundHit = document.getElementById('sound-hit');
+const soundNextlevel = document.getElementById('sound-nextlevel');
+const soundWin = document.getElementById('sound-win');
+
+// Constants
+const LEVELUP_COUNT = 10;
+const WIN_SCORE = 50; // counts
+const JUMP_DELAY = 500; // milliseconds
+const JUMP_DURATION = 850; // milliseconds
+const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
 
 // =========== Listeners ===========
 addEventListener('DOMContentLoaded', () => {
@@ -55,6 +55,12 @@ const targetImages = {
   4: "url('images/jumper.svg')",
   5: "url('images/jumper-fun.svg')",
 };
+
+// Utils
+export function delay(func, ms) {
+  if (!ms) ms = 500;
+  setTimeout(() => func(), ms);
+}
 
 // Check
 const isWin = () => {
