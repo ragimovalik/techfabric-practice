@@ -50,11 +50,11 @@ const JUMP_DURATION = 850; // milliseconds
 const LEVELUP_SPEEDUP_STEP = 50; // milliseconds
 
 const targetImages = {
-  1: "background-image: url('../images/stickman-dancing.svg')",
-  2: "background-image: url('../images/fish.svg')",
-  3: "background-image: url('../images/basketball.svg')",
-  4: "background-image: url('../images/jumper.svg')",
-  5: "background-image: url('../images/jumper-fun.svg')",
+  1: "url('../images/stickman-dancing.svg')",
+  2: "url('../images/fish.svg')",
+  3: "url('../images/basketball.svg')",
+  4: "url('../images/jumper.svg')",
+  5: "url('../images/jumper-fun.svg')",
 };
 
 // Utils
@@ -100,7 +100,7 @@ const isNextLevel = () => {
     hitCountToNextLevel = LEVELUP_COUNT;
     levelLengthEl.textContent = LEVELUP_COUNT;
 
-    targetEl.style = targetImages[level];
+    targetEl.style.backgroundImage = targetImages[level];
 
     return true;
   }
